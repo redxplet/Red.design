@@ -1,8 +1,9 @@
-<!DOCTYPE html><html lang="ar">
+  <!DOCTYPE html>
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تسجيل الدخول / إنشاء حساب - Red Design</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>تسجيل الدخول - Red Design</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -12,91 +13,86 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
-    }.auth-box {
-  background: #fff;
-  padding: 40px 30px;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-}
-
-h2 {
-  color: #ff4b2b;
-  margin-bottom: 10px;
-}
-
-.slogan {
-  font-size: 14px;
-  color: #888;
-  margin-bottom: 25px;
-}
-
-input {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  transition: border-color 0.3s;
-}
-
-input:focus {
-  border-color: #ff4b2b;
-  outline: none;
-}
-
-button {
-  background-color: #ff4b2b;
-  color: white;
-  padding: 12px;
-  width: 100%;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #e84328;
-}
-
-.toggle-link {
-  margin-top: 10px;
-  color: #007bff;
-  cursor: pointer;
-  display: block;
-}
-
-#message {
-  margin-top: 10px;
-}
-
+    }
+    .auth-box {
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    h2 {
+      color: #ff4b2b;
+      margin-bottom: 10px;
+    }
+    .slogan {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 25px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: border-color 0.3s;
+    }
+    input:focus {
+      border-color: #ff4b2b;
+      outline: none;
+    }
+    button {
+      background-color: #ff4b2b;
+      color: white;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #e84328;
+    }
+    a.toggle-link {
+      margin-top: 10px;
+      color: #007bff;
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+    }
+    a.toggle-link:hover {
+      text-decoration: underline;
+    }
+    #message {
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
   <div class="auth-box">
     <h2>Red Design</h2>
-    <p class="slogan">Innovation through technology, excellence through execution.</p><form id="login-form">
-  <input type="email" id="login-email" placeholder="البريد الإلكتروني" required />
-  <input type="password" id="login-password" placeholder="كلمة المرور" required />
-  <button type="submit">تسجيل الدخول</button>
-</form>
+    <p class="slogan">Innovation through technology, excellence through execution.</p>
+    <form id="login-form">
+      <input type="email" id="login-email" placeholder="البريد الإلكتروني" required />
+      <input type="password" id="login-password" placeholder="كلمة المرور" required />
+      <button type="submit">تسجيل الدخول</button>
+    </form>
 
-<form id="signup-form" style="display:none;">
-  <input type="email" id="signup-email" placeholder="البريد الإلكتروني" required />
-  <input type="password" id="signup-password" placeholder="كلمة المرور" required />
-  <button type="submit">إنشاء حساب</button>
-</form>
+    <!-- هنا استخدمنا رابط حقيقي للانتقال لصفحة إنشاء حساب -->
+    <a href="signup.html" class="toggle-link">لا تملك حساباً؟ إنشاء حساب</a>
 
-<span id="toggle-to-signup" class="toggle-link">لا تملك حساباً؟ إنشاء حساب</span>
-<span id="toggle-to-login" class="toggle-link" style="display:none;">هل لديك حساب؟ تسجيل الدخول</span>
+    <p id="message"></p>
+  </div>
 
-<p id="message"></p>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
 
-  </div>  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>  <script>
+  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyBWhIw34rJC7-xtqRt5AOPsgjBd-m_fiy0",
       authDomain: "red-test-5f648.firebaseapp.com",
@@ -124,40 +120,11 @@ button:hover {
         });
     });
 
-    document.getElementById("signup-form").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const email = document.getElementById("signup-email").value;
-      const password = document.getElementById("signup-password").value;
-
-      auth.createUserWithEmailAndPassword(email, password)
-        .then(() => {
-          showMessage("تم إنشاء الحساب بنجاح", "green");
-        })
-        .catch(error => {
-          showMessage(error.message, "red");
-        });
-    });
-
     function showMessage(message, color) {
       const msgEl = document.getElementById("message");
       msgEl.textContent = message;
       msgEl.style.color = color;
     }
-
-    document.getElementById("toggle-to-signup").addEventListener("click", () => {
-      toggleForms("signup");
-    });
-
-    document.getElementById("toggle-to-login").addEventListener("click", () => {
-      toggleForms("login");
-    });
-
-    function toggleForms(type) {
-      const loginForm = document.getElementById("login-form");
-      const signupForm = document.getElementById("signup-form");
-      const toggleToSignup = document.getElementById("toggle-to-signup");
-      const toggleToLogin = document.getElementById("toggle-to-login");
-      document.getElementById("message").textContent = "";
-
-      if (type === "signup") {
-       
+  </script>
+</body>
+</html>
